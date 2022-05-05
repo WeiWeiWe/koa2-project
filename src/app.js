@@ -5,6 +5,10 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const session = require('koa-generic-session')
+const redisStore = require('koa-redis')
+
+const { REDIS_CONF } = require('./config/db')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -22,6 +26,21 @@ app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
+}))
+
+// session 配置
+app.keys = ['Udasa_1592#$']
+app.use(session({
+  key: 'abc.sid', // cookie name，默認是 `koa.sid`
+  prefix: 'abc:sess:', // redis key 的前綴，默認是 `koa:sess:`
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // ms
+  },
+  store: redisStore({
+    all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
+  })
 }))
 
 // logger
