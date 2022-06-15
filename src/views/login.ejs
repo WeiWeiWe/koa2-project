@@ -1,0 +1,48 @@
+<%- include('layout/header', { title: '登入', isNarrow: true })%>
+
+<h1>登入</h1>
+<% if (locals.isLogin) { %>
+    <p><%= locals.userName%> 您已成功登入，請直接訪問<a href="/">首頁</a></p>
+<% } else { %>
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" id="input-username" placeholder="請輸入用戶名">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="input-password" placeholder="請輸入密碼">
+        </div>
+        <button type="submit" class="btn btn-primary" id="btn-submit">登入</button>
+        &nbsp;
+        <a href="/register">註冊帳號>></a>
+    </form>
+
+    <script>
+        $(function() {
+            var $inputUserName = $('#input-username')
+            var $inputPassword = $('#input-password')
+            $('#btn-submit').click(function(e) {
+                // 阻止默認的提交表單行為
+                e.preventDefault()
+                const userName = $inputUserName.val()
+                const password = $inputPassword.val()
+
+                // 提交數據
+                ajax.post('/api/user/login', {
+                    userName,
+                    password
+                }, function(err, data) {
+                    if (err) {
+                        alert(err)
+                        return
+                    }
+
+                    // 跳轉到指定 url 或首頁 -> http://localhost:3000/login?url=xxxx
+                    var redirectUrl = $.query.get('url') || '/'
+                    location.href = redirectUrl
+                })
+            })
+        })
+    </script>
+<% } %>
+
+<%- include('layout/footer')%>
