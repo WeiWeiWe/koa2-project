@@ -10,6 +10,7 @@ const redisStore = require('koa-redis')
 
 const { REDIS_CONF } = require('./dbConfig/redisConf')
 const { isProd } = require('./utils/env');
+const { SESSION_SECRET_KEY } = require('./config/secretKeys')
 
 // routes
 const index = require('./routes/index')
@@ -39,7 +40,7 @@ app.use(views(__dirname + '/views', {
 }))
 
 // session 配置
-app.keys = ['Udasa_1592#$']
+app.keys = [SESSION_SECRET_KEY]
 app.use(session({
   key: 'abc.sid', // cookie name，默認是 `koa.sid`
   prefix: 'abc:sess:', // redis key 的前綴，默認是 `koa:sess:`
