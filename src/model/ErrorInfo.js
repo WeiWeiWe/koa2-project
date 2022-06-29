@@ -26,5 +26,9 @@ module.exports = {
   jsonSchemaFailInfo: {
     errno: 10009,
     message: '數據格式校驗錯誤'
+  },
+  deleteUserFailInfo: {
+    errno: 10010,
+    message: '刪除用戶失敗'
   }
 }

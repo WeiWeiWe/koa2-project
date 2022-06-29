@@ -49,7 +49,22 @@ async function createUser({ userName, password, gender = 3, nickName }) {
   return result.dataValues
 }
 
+/**
+ * 刪除用戶
+ * @param {string} userName 用戶名 
+ */
+async function deleteUser(userName) {
+  const result = await User.destroy({
+    where: {
+      userName
+    }
+  })
+  // result -> 刪除的行數
+  return result > 0
+}
+
 module.exports = {
   getUserInfo,
   createUser,
+  deleteUser,
 }
