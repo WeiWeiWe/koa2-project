@@ -1,3 +1,5 @@
 node_modules/
 src/dbConfig
 src/config/secretKeys.js
+dump.rdb
+uploadFiles

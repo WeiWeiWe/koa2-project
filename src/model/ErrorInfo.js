@@ -23,6 +23,10 @@ module.exports = {
     errno: 10005,
     message: '您尚未登入'
   },
+  uploadFileSizeFailInfo: {
+    errno: 10007,
+    message: '上傳文件尺寸過大'
+  },
   jsonSchemaFailInfo: {
     errno: 10009,
     message: '數據格式校驗錯誤'
