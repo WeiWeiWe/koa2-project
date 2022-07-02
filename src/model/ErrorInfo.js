@@ -23,6 +23,10 @@ module.exports = {
     errno: 10005,
     message: '您尚未登入'
   },
+  changePasswordFailInfo: {
+    errno: 10006,
+    message: '修改密碼失敗，請重試'
+  },
   uploadFileSizeFailInfo: {
     errno: 10007,
     message: '上傳文件尺寸過大'
