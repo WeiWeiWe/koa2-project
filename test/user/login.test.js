@@ -67,12 +67,45 @@ test('登入，應該成功', async () => {
   COOKIE = res.header['set-cookie'].join(';')
 })
 
+// 修改基本信息
+test('修改基本信息，應該成功', async () => {
+  const res = await server
+    .patch('/api/user/changeInfo')
+    .send({
+      nickName: '測試暱稱',
+      city: '測試城市',
+      picture: '/test.png'
+    })
+    .set('cookie', COOKIE)
+  expect(res.body.errno).toBe(0)
+})
+
+// 修改密碼
+test('修改密碼，應該成功', async () => {
+  const res = await server
+    .patch('/api/user/changePassword')
+    .send({
+      password,
+      newPasswrod: `p_${Date.now()}`
+    })
+    .set('cookie', COOKIE)
+  expect(res.body.errno).toBe(0)
+})
+
 // 刪除
 test('刪除用戶，應該成功', async () => {
   const res = await server
     .post('/api/user/delete')
     .set('cookie', COOKIE) // 繞過登入驗證
   expect(res.body.errno).toBe(0) 
+})
+
+// 退出登入
+test('退出登入，應該成功', async () => {
+  const res = await server
+    .post('/api/user/logout')
+    .set('cookie', COOKIE)
+  expect(res.body.errno).toBe(0)
 })
 
 // 再次查詢用戶，應該不存在
