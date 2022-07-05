@@ -42,5 +42,9 @@ module.exports = {
   deleteUserFailInfo: {
     errno: 10010,
     message: '刪除用戶失敗'
+  },
+  createBlogFailInfo: {
+    errno: 11001,
+    message: '創建文章失敗，請重試'
   }
 }
