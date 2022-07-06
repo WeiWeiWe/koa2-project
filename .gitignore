@@ -3,3 +3,4 @@ src/dbConfig
 src/config/secretKeys.js
 dump.rdb
 uploadFiles
+test/testUserInfo.js
